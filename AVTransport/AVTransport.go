@@ -756,7 +756,7 @@ type PlayArgs struct {
 	Xmlns      string `xml:"xmlns:u,attr"`
 	InstanceID uint32 `xml:"InstanceID"`
 	// Allowed Value: 1
-	Speed string `xml:"Speed"`
+	Speed int `xml:"Speed"`
 }
 type PlayResponse struct {
 }

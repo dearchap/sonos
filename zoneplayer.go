@@ -6,20 +6,20 @@ import (
 	"net/http"
 	"net/url"
 
-	avt "github.com/szatmary/sonos/AVTransport"
-	clk "github.com/szatmary/sonos/AlarmClock"
-	con "github.com/szatmary/sonos/ConnectionManager"
-	dir "github.com/szatmary/sonos/ContentDirectory"
-	dev "github.com/szatmary/sonos/DeviceProperties"
-	gmn "github.com/szatmary/sonos/GroupManagement"
-	rcg "github.com/szatmary/sonos/GroupRenderingControl"
-	mus "github.com/szatmary/sonos/MusicServices"
-	ply "github.com/szatmary/sonos/QPlay"
-	que "github.com/szatmary/sonos/Queue"
-	ren "github.com/szatmary/sonos/RenderingControl"
-	sys "github.com/szatmary/sonos/SystemProperties"
-	vli "github.com/szatmary/sonos/VirtualLineIn"
-	zgt "github.com/szatmary/sonos/ZoneGroupTopology"
+	avt "github.com/Coollision/sonos/AVTransport"
+	clk "github.com/Coollision/sonos/AlarmClock"
+	con "github.com/Coollision/sonos/ConnectionManager"
+	dir "github.com/Coollision/sonos/ContentDirectory"
+	dev "github.com/Coollision/sonos/DeviceProperties"
+	gmn "github.com/Coollision/sonos/GroupManagement"
+	rcg "github.com/Coollision/sonos/GroupRenderingControl"
+	mus "github.com/Coollision/sonos/MusicServices"
+	ply "github.com/Coollision/sonos/QPlay"
+	que "github.com/Coollision/sonos/Queue"
+	ren "github.com/Coollision/sonos/RenderingControl"
+	sys "github.com/Coollision/sonos/SystemProperties"
+	vli "github.com/Coollision/sonos/VirtualLineIn"
+	zgt "github.com/Coollision/sonos/ZoneGroupTopology"
 )
 
 type SpecVersion struct {
@@ -223,7 +223,7 @@ func (z *ZonePlayer) SetVolume(desiredVolume int) error {
 
 func (z *ZonePlayer) Play() error {
 	_, err := z.AVTransport.Play(z.HttpClient, &avt.PlayArgs{
-		Speed: "1.0",
+		Speed: 1,
 	})
 	return err
 }

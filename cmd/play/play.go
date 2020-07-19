@@ -5,7 +5,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/szatmary/sonos"
+	"github.com/Coollision/sonos"
 )
 
 func main() {
