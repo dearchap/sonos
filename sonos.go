@@ -21,21 +21,32 @@ type Sonos struct {
 	listenSocket *net.UDPConn
 	udpReader    *bufio.Reader
 	found        chan *ZonePlayer
+	port         int // the port to bind to for listening
 }
 
-func NewSonos() (*Sonos, error) {
-	conn, err := net.ListenUDP("udp", &net.UDPAddr{IP: []byte{0, 0, 0, 0}, Port: 0, Zone: ""})
+// Options to configure the listeners
+type Option func(*Sonos)
+
+func ListenerPortOption(port int) Option {
+	return func(s *Sonos) {
+		s.port = port
+	}
+}
+func NewSonos(options ...Option) (*Sonos, error) {
+	s := &Sonos{}
+
+	for _, option := range options {
+		option(s)
+	}
+
+	conn, err := net.ListenUDP("udp", &net.UDPAddr{IP: []byte{0, 0, 0, 0}, Port: s.port, Zone: ""})
 	if err != nil {
 		return nil, err
 	}
+	s.listenSocket = conn
+	s.udpReader = bufio.NewReader(conn)
 
-	s := Sonos{
-		listenSocket: conn,
-		udpReader:    bufio.NewReader(conn),
-		found:        make(chan *ZonePlayer),
-	}
-
-	return &s, nil
+	return s, nil
 }
 
 func (s *Sonos) Close() {
